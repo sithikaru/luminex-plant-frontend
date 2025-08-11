@@ -100,7 +100,7 @@ export default function SpeciesPage() {
 
   const filteredSpecies = species.filter(s =>
     s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    s.scientificName.toLowerCase().includes(searchTerm.toLowerCase())
+    (s.scientificName || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const containerVariants = {

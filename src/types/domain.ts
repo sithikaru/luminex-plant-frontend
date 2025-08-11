@@ -1,4 +1,10 @@
-// User types
+// User and Role types
+export enum UserRole {
+  SUPER_ADMIN = "SUPER_ADMIN",
+  MANAGER = "MANAGER", 
+  FIELD_OFFICER = "FIELD_OFFICER",
+}
+
 export interface User {
   id: string;
   email: string;
@@ -10,17 +16,24 @@ export interface User {
   updatedAt: string;
 }
 
-export enum UserRole {
-  SUPER_ADMIN = "SUPER_ADMIN",
-  MANAGER = "MANAGER",
-  FIELD_OFFICER = "FIELD_OFFICER",
+// Species types
+export enum SpeciesCategory {
+  TREE = "TREE",
+  SHRUB = "SHRUB",
+  HERB = "HERB",
+  GRASS = "GRASS",
+  FERN = "FERN",
+  VINE = "VINE",
+  SUCCULENT = "SUCCULENT",
+  AQUATIC = "AQUATIC",
 }
 
-// Species types
 export interface Species {
   id: string;
   name: string;
   scientificName?: string | null;
+  description?: string | null;
+  category: SpeciesCategory;
   targetGirth: number;
   targetHeight: number;
   isActive: boolean;
@@ -36,6 +49,7 @@ export interface Zone {
   id: string;
   name: string;
   capacity: number;
+  occupied?: number;
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
