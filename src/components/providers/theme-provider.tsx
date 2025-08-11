@@ -5,7 +5,6 @@ import { ReactNode } from 'react';
 
 interface ThemeProviderProps {
   children: ReactNode;
-  attribute?: string;
   defaultTheme?: string;
   enableSystem?: boolean;
   disableTransitionOnChange?: boolean;
@@ -13,19 +12,16 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ 
   children, 
-  attribute = 'class',
   defaultTheme = 'system',
   enableSystem = true,
   disableTransitionOnChange = true,
-  ...props 
 }: ThemeProviderProps) {
   return (
     <NextThemesProvider 
-      attribute={attribute}
+      attribute="class"
       defaultTheme={defaultTheme}
       enableSystem={enableSystem}
       disableTransitionOnChange={disableTransitionOnChange}
-      {...props}
     >
       {children}
     </NextThemesProvider>
