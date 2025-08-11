@@ -1,86 +1,46 @@
 'use client'
-
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
 import { useSession } from 'next-auth/react'
-import {
-  LayoutDashboard,
-  BarChart,
-  Leaf,
-  Users,
-  Settings
-} from 'lucide-react'
+import { ROLE } from '@/lib/constants'
+import { cn } from '@/lib/utils'
 
-interface NavItem {
-  label: string
-  href: string
-  icon: React.ReactNode
-  roles: string[]
+function NavItem({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className={cn(
+      'block px-4 py-2 hover:bg-gray-100 rounded-md text-sm'
+    )}>
+      {label}
+    </Link>
+  )
 }
 
-const navItems: NavItem[] = [
-  {
-    label: 'Dashboard',
-    href: '/dashboard',
-    icon: <LayoutDashboard className="h-5 w-5" />,
-    roles: ['SUPER_ADMIN', 'MANAGER', 'FIELD_OFFICER']
-  },
-  {
-    label: 'Batches',
-    href: '/batches',
-    icon: <Leaf className="h-5 w-5" />,
-    roles: ['SUPER_ADMIN', 'MANAGER', 'FIELD_OFFICER']
-  },
-  {
-    label: 'Analytics',
-    href: '/analytics',
-    icon: <BarChart className="h-5 w-5" />,
-    roles: ['SUPER_ADMIN', 'MANAGER']
-  },
-  {
-    label: 'Users',
-    href: '/users',
-    icon: <Users className="h-5 w-5" />,
-    roles: ['SUPER_ADMIN']
-  },
-  {
-    label: 'Settings',
-    href: '/settings',
-    icon: <Settings className="h-5 w-5" />,
-    roles: ['SUPER_ADMIN']
-  }
-]
-
-export function Sidebar() {
-  const { data: session } = useSession()
-  const pathname = usePathname()
-
-  const role = (session?.user as any)?.role ?? 'GUEST'
+export default function Sidebar() {
+  const { data } = useSession()
+  const role = (data?.user as any)?.role
 
   return (
-    <aside className="h-full w-full p-4 overflow-y-auto bg-white border-r">
-      <h2 className="text-lg font-bold mb-6">LuminexPlant</h2>
-      <nav className="space-y-2">
-        {navItems
-          .filter((item) => item.roles.includes(role))
-          .map((item) => {
-            const isActive = pathname.startsWith(item.href)
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  'flex items-center gap-3 px-3 py-2 rounded-md hover:bg-slate-100 text-sm font-medium transition',
-                  isActive ? 'bg-slate-200 text-black' : 'text-slate-700'
-                )}
-              >
-                {item.icon}
-                {item.label}
-              </Link>
-            )
-          })}
-      </nav>
+    <aside className="h-full p-4">
+      <div className="font-semibold mb-3">Navigation</div>
+      {role === ROLE.SUPER_ADMIN && (
+        <nav className="space-y-1">
+          <NavItem href="/admin" label="Dashboard" />
+          <NavItem href="/admin/species" label="Species" />
+          <NavItem href="/admin/zones" label="Zones" />
+          <NavItem href="/admin/beds" label="Beds" />
+          <NavItem href="/manager/batches" label="Batches" />
+        </nav>
+      )}
+      {role === ROLE.MANAGER && (
+        <nav className="space-y-1">
+          <NavItem href="/manager" label="Dashboard" />
+          <NavItem href="/manager/batches" label="Batches" />
+        </nav>
+      )}
+      {role === ROLE.FIELD_OFFICER && (
+        <nav className="space-y-1">
+          <NavItem href="/officer" label="My Tasks" />
+        </nav>
+      )}
     </aside>
   )
 }
