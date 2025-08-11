@@ -25,11 +25,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
 import { DashboardLayout } from '@/components/layouts/DashboardLayout';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Separator } from '@/components/ui/separator';
 import { toast } from 'react-hot-toast';
 import { UserRole } from '@/types/domain';
 
@@ -389,82 +387,93 @@ export default function SettingsPage() {
                         <Label htmlFor="emailNotifications">Email Notifications</Label>
                         <p className="text-sm text-muted-foreground">Receive notifications via email</p>
                       </div>
-                      <Switch
+                      <input
+                        type="checkbox"
                         id="emailNotifications"
                         checked={notificationSettings.emailNotifications}
-                        onCheckedChange={(checked: boolean) => 
-                          setNotificationSettings({ ...notificationSettings, emailNotifications: checked })
+                        onChange={(e) => 
+                          setNotificationSettings({ ...notificationSettings, emailNotifications: e.target.checked })
                         }
+                        className="h-4 w-4 rounded border-gray-300 text-plant-600 focus:ring-plant-500"
                       />
                     </div>
-                    <Separator />
+                    <div className="border-t border-gray-200" />
                     <div className="flex items-center justify-between">
                       <div>
                         <Label htmlFor="pushNotifications">Push Notifications</Label>
                         <p className="text-sm text-muted-foreground">Receive browser push notifications</p>
                       </div>
-                      <Switch
+                      <input
+                        type="checkbox"
                         id="pushNotifications"
                         checked={notificationSettings.pushNotifications}
-                        onCheckedChange={(checked: boolean) => 
-                          setNotificationSettings({ ...notificationSettings, pushNotifications: checked })
+                        onChange={(e) => 
+                          setNotificationSettings({ ...notificationSettings, pushNotifications: e.target.checked })
                         }
+                        className="h-4 w-4 rounded border-gray-300 text-plant-600 focus:ring-plant-500"
                       />
                     </div>
-                    <Separator />
+                    <div className="border-t border-gray-200" />
                     <div className="flex items-center justify-between">
                       <div>
                         <Label htmlFor="taskReminders">Task Reminders</Label>
                         <p className="text-sm text-muted-foreground">Get reminded about upcoming tasks</p>
                       </div>
-                      <Switch
+                      <input
+                        type="checkbox"
                         id="taskReminders"
                         checked={notificationSettings.taskReminders}
-                        onCheckedChange={(checked: boolean) => 
-                          setNotificationSettings({ ...notificationSettings, taskReminders: checked })
+                        onChange={(e) => 
+                          setNotificationSettings({ ...notificationSettings, taskReminders: e.target.checked })
                         }
+                        className="h-4 w-4 rounded border-gray-300 text-plant-600 focus:ring-plant-500"
                       />
                     </div>
-                    <Separator />
                     <div className="flex items-center justify-between">
                       <div>
                         <Label htmlFor="batchUpdates">Batch Updates</Label>
                         <p className="text-sm text-muted-foreground">Notifications about batch status changes</p>
                       </div>
-                      <Switch
+                      <input
+                        type="checkbox"
                         id="batchUpdates"
                         checked={notificationSettings.batchUpdates}
-                        onCheckedChange={(checked: boolean) => 
-                          setNotificationSettings({ ...notificationSettings, batchUpdates: checked })
+                        onChange={(e) => 
+                          setNotificationSettings({ ...notificationSettings, batchUpdates: e.target.checked })
                         }
+                        className="h-4 w-4 rounded border-gray-300 text-plant-600 focus:ring-plant-500"
                       />
                     </div>
-                    <Separator />
+                    <div className="border-t border-gray-200" />
                     <div className="flex items-center justify-between">
                       <div>
                         <Label htmlFor="systemAlerts">System Alerts</Label>
                         <p className="text-sm text-muted-foreground">Important system notifications</p>
                       </div>
-                      <Switch
+                      <input
+                        type="checkbox"
                         id="systemAlerts"
                         checked={notificationSettings.systemAlerts}
-                        onCheckedChange={(checked: boolean) => 
-                          setNotificationSettings({ ...notificationSettings, systemAlerts: checked })
+                        onChange={(e) => 
+                          setNotificationSettings({ ...notificationSettings, systemAlerts: e.target.checked })
                         }
+                        className="h-4 w-4 rounded border-gray-300 text-plant-600 focus:ring-plant-500"
                       />
                     </div>
-                    <Separator />
+                    <div className="border-t border-gray-200" />
                     <div className="flex items-center justify-between">
                       <div>
                         <Label htmlFor="weeklyReports">Weekly Reports</Label>
                         <p className="text-sm text-muted-foreground">Receive weekly summary reports</p>
                       </div>
-                      <Switch
+                      <input
+                        type="checkbox"
                         id="weeklyReports"
                         checked={notificationSettings.weeklyReports}
-                        onCheckedChange={(checked: boolean) => 
-                          setNotificationSettings({ ...notificationSettings, weeklyReports: checked })
+                        onChange={(e) => 
+                          setNotificationSettings({ ...notificationSettings, weeklyReports: e.target.checked })
                         }
+                        className="h-4 w-4 rounded border-gray-300 text-plant-600 focus:ring-plant-500"
                       />
                     </div>
                   </div>
@@ -569,15 +578,17 @@ export default function SettingsPage() {
                         <Label htmlFor="twoFactor">Two-Factor Authentication</Label>
                         <p className="text-sm text-muted-foreground">Add an extra layer of security</p>
                       </div>
-                      <Switch
+                      <input
+                        type="checkbox"
                         id="twoFactor"
                         checked={securitySettings.twoFactorEnabled}
-                        onCheckedChange={(checked: boolean) => 
-                          setSecuritySettings({ ...securitySettings, twoFactorEnabled: checked })
+                        onChange={(e) => 
+                          setSecuritySettings({ ...securitySettings, twoFactorEnabled: e.target.checked })
                         }
+                        className="h-4 w-4 rounded border-gray-300 text-plant-600 focus:ring-plant-500"
                       />
                     </div>
-                    <Separator />
+                    <div className="border-t border-gray-200" />
                     <div>
                       <Label htmlFor="sessionTimeout">Session Timeout (minutes)</Label>
                       <Input
@@ -724,7 +735,7 @@ export default function SettingsPage() {
                       Export
                     </Button>
                   </div>
-                  <Separator />
+                  <div className="border-t border-gray-200" />
                   <div className="flex items-center justify-between">
                     <div>
                       <h4 className="font-medium">Delete Account</h4>
@@ -760,15 +771,17 @@ export default function SettingsPage() {
                             Temporarily disable access for maintenance
                           </p>
                         </div>
-                        <Switch
+                        <input
+                          type="checkbox"
                           id="maintenanceMode"
                           checked={systemSettings.maintenanceMode}
-                          onCheckedChange={(checked) => 
-                            setSystemSettings({ ...systemSettings, maintenanceMode: checked })
+                          onChange={(e) => 
+                            setSystemSettings({ ...systemSettings, maintenanceMode: e.target.checked })
                           }
+                          className="h-4 w-4 rounded border-gray-300 text-plant-600 focus:ring-plant-500"
                         />
                       </div>
-                      <Separator />
+                      <div className="border-t border-gray-200" />
                       <div className="flex items-center justify-between">
                         <div>
                           <Label htmlFor="allowRegistration">Allow Registration</Label>
@@ -776,15 +789,17 @@ export default function SettingsPage() {
                             Allow new users to register accounts
                           </p>
                         </div>
-                        <Switch
+                        <input
+                          type="checkbox"
                           id="allowRegistration"
                           checked={systemSettings.allowRegistration}
-                          onCheckedChange={(checked) => 
-                            setSystemSettings({ ...systemSettings, allowRegistration: checked })
+                          onChange={(e) => 
+                            setSystemSettings({ ...systemSettings, allowRegistration: e.target.checked })
                           }
+                          className="h-4 w-4 rounded border-gray-300 text-plant-600 focus:ring-plant-500"
                         />
                       </div>
-                      <Separator />
+                      <div className="border-t border-gray-200" />
                       <div>
                         <Label htmlFor="backupFrequency">Backup Frequency</Label>
                         <Select 
