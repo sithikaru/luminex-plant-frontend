@@ -32,27 +32,15 @@ export const UNIT_CONVERSIONS = {
   },
 }
 
-export const convertLength = (
-  value: number,
-  fromUnit: LengthUnit,
-  toUnit: LengthUnit
-): number => {
-  const converter = UNIT_CONVERSIONS[fromUnit]?.[toUnit]
-  if (!converter) {
-    throw new Error(`Conversion from ${fromUnit} to ${toUnit} not supported`)
-  }
-  return Number(converter(value).toFixed(2))
+export const convertLength = (v: number, from: LengthUnit, to: LengthUnit) => {
+  const fn = (UNIT_CONVERSIONS as any)[from]?.[to]
+  if (!fn) throw new Error(`Conversion from ${from} to ${to} not supported`)
+  return Number(fn(v).toFixed(2))
 }
 
-export const formatLength = (
-  value: number,
-  unit: LengthUnit,
-  precision: number = 2
-): string => {
-  return `${value.toFixed(precision)} ${unit}`
-}
+export const formatLength = (v: number, unit: LengthUnit, p = 2) =>
+  `${v.toFixed(p)} ${unit}`
 
-// Predefined measurement ranges in CM (stored in DB)
 export const GIRTH_RANGES = [
   { label: '0.5-1.0 cm', min: 0.5, max: 1.0 },
   { label: '1.0-1.5 cm', min: 1.0, max: 1.5 },
