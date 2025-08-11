@@ -448,7 +448,7 @@ export default function SettingsPage() {
                       <Switch
                         id="systemAlerts"
                         checked={notificationSettings.systemAlerts}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={(checked: boolean) => 
                           setNotificationSettings({ ...notificationSettings, systemAlerts: checked })
                         }
                       />
@@ -462,7 +462,7 @@ export default function SettingsPage() {
                       <Switch
                         id="weeklyReports"
                         checked={notificationSettings.weeklyReports}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={(checked: boolean) => 
                           setNotificationSettings({ ...notificationSettings, weeklyReports: checked })
                         }
                       />
@@ -572,7 +572,7 @@ export default function SettingsPage() {
                       <Switch
                         id="twoFactor"
                         checked={securitySettings.twoFactorEnabled}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={(checked: boolean) => 
                           setSecuritySettings({ ...securitySettings, twoFactorEnabled: checked })
                         }
                       />
