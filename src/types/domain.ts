@@ -192,6 +192,8 @@ export interface Task {
   createdAt: string;
   completedAt?: string | null;
   user?: User;
+  batchId?: string | null;
+  zoneId?: string | null;
 }
 
 export enum TaskType {
